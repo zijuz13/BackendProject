@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wechat-itemservice/itemservice-application/itemservice-application.iml" filepath="$PROJECT_DIR$/wechat-itemservice/itemservice-application/itemservice-application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-itemservice/itemservice-interface/itemservice-interface.iml" filepath="$PROJECT_DIR$/wechat-itemservice/itemservice-interface/itemservice-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-pulldata/pulldata-interface1/pulldata-interface1.iml" filepath="$PROJECT_DIR$/wechat-pulldata/pulldata-interface1/pulldata-interface1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-pulldata/pulldata-service/pulldata-service.iml" filepath="$PROJECT_DIR$/wechat-pulldata/pulldata-service/pulldata-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-eureka/wechat-eureka.iml" filepath="$PROJECT_DIR$/wechat-eureka/wechat-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-gateway/wechat-gateway.iml" filepath="$PROJECT_DIR$/wechat-gateway/wechat-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-itemservice/wechat-itemservice.iml" filepath="$PROJECT_DIR$/wechat-itemservice/wechat-itemservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-pulldata/wechat-pulldata.iml" filepath="$PROJECT_DIR$/wechat-pulldata/wechat-pulldata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-searchservice/wechat-searchservice.iml" filepath="$PROJECT_DIR$/wechat-searchservice/wechat-searchservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechat-video-edit/wechat-video-edit.iml" filepath="$PROJECT_DIR$/wechat-video-edit/wechat-video-edit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechatapp.iml" filepath="$PROJECT_DIR$/wechatapp.iml" />
+    </modules>
+  </component>
+</project>

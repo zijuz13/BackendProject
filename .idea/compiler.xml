@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wechat-searchservice" />
+        <module name="pulldata-interface1" />
+        <module name="itemservice-application" />
+        <module name="pulldata-service" />
+        <module name="itemservice-interface" />
+        <module name="wechat-eureka" />
+        <module name="wechat-gateway" />
+        <module name="pulldata-interface" />
+        <module name="wechat-video-edit" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="itemservice-application" target="1.8" />
+      <module name="itemservice-interface" target="1.8" />
+      <module name="pulldata-interface" target="1.8" />
+      <module name="pulldata-interface1" target="1.8" />
+      <module name="pulldata-service" target="1.8" />
+      <module name="wechat-eureka" target="1.8" />
+      <module name="wechat-gateway" target="1.8" />
+      <module name="wechat-itemservice" target="1.8" />
+      <module name="wechat-pulldata" target="1.8" />
+      <module name="wechat-searchservice" target="1.8" />
+      <module name="wechat-video-edit" target="1.8" />
+      <module name="wechatapp" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="itemservice-application" options="-parameters" />
+      <module name="itemservice-interface" options="-parameters" />
+      <module name="pulldata-interface" options="-parameters" />
+      <module name="pulldata-interface1" options="-parameters" />
+      <module name="pulldata-service" options="-parameters" />
+      <module name="wechat-eureka" options="-parameters" />
+      <module name="wechat-gateway" options="-parameters" />
+      <module name="wechat-pulldata" options="-parameters" />
+      <module name="wechat-searchservice" options="-parameters" />
+      <module name="wechat-video-edit" options="-parameters" />
+    </option>
+  </component>
+</project>

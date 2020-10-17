@@ -1,0 +1,32 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: wechat-zuul
+zuul:
+  prefix: /api
+  routes:
+    item-service: /item/**
+    search-service: /search/**
+    edit-service: /edit/**
+    pulldata-service: /pull/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 10
+    fetch-registry: true
+    register-with-eureka: true
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: "${host}"
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 40000

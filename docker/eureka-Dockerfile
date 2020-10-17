@@ -1,0 +1,5 @@
+FROM java:8
+RUN mkdir -pv /home/hujkc123/
+VOLUME /home/hujkc123
+ENV MYPATH /home/hujkc123
+WORKDIR $MYPATH

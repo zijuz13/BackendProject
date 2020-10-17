@@ -1,0 +1,23 @@
+server:
+  port: 10034
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 10
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+#    prefer-ip-address: true
+#    ip-address: "${host}"
+feign:
+  client:
+    config:
+      item-service:
+        connectTimeout: 10000
+        readTimeout: 10000
+spring:
+  application:
+    name: edit-service
