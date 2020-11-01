@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Service
 public class JobBiz implements IJobBiz {
     @Autowired
@@ -18,7 +20,7 @@ public class JobBiz implements IJobBiz {
         try {
             LOGGER.info("STARTED");
             JobDetail jobDetail = JobBuilder.newJob(FetchNewsJob.class).withIdentity("1", "hujkc123").build();
-            CronScheduleBuilder builder = CronScheduleBuilder.cronSchedule("0 /9 * * * ? ");
+            CronScheduleBuilder builder = CronScheduleBuilder.cronSchedule("0 /5 * * * ? ");
             CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("1", "hujkc123").withSchedule(builder).build();
             scheduler.scheduleJob(jobDetail, cronTrigger);
         }catch (Exception e){

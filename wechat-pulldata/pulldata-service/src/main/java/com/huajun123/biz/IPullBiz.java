@@ -13,4 +13,5 @@ public interface IPullBiz {
     Map<String,String> getPredictitOrgInformation(StopCounter counter);
     List<ElectionNews> getAllElectionNews();
     void saveToRedis();
+    void getCnnTopNews();
 }

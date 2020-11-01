@@ -138,9 +138,36 @@ public class PullBiz implements IPullBiz {
         news1.setBettingOdds(new HashMap<>());
         list.add(news);
         list.add(news1);
-        this.loadPredictitInformation(list,new StopCounter());
-        this.loadOtherMarketsInformationFromRCP(list,new StopCounter());
-        this.loadNationalPollsFromRCP(list,new StopCounter());
+        Thread t1=new Thread(()->{
+            synchronized (list) {
+                this.loadPredictitInformation(list, new StopCounter());
+                LOGGER.info("Thread-1 has been created successfully!");
+            }
+        });
+        t1.start();
+        Thread t2=new Thread(()->{
+            synchronized (list) {
+                this.loadOtherMarketsInformationFromRCP(list, new StopCounter());
+            }
+            LOGGER.info("Thread-2 has been created successfully!");
+        });
+        t2.start();
+        Thread t3=new Thread(()->{
+            synchronized (list) {
+                this.loadNationalPollsFromRCP(list, new StopCounter());
+                LOGGER.info("Thread-3 has been created successfully!");
+            }
+        });
+        t3.start();
+        try {
+            //main主线程等待其他线程爬取资料
+            t1.join();
+            t2.join();
+            t3.join();
+        }catch (Exception e){
+            LOGGER.error("something goes wrong {}",e.getMessage());
+        }
+
         ThreadUtils.execute(() -> {
             try {
                 template.opsForValue().set(REDISCACHE, objectMapper.writeValueAsString(list));
@@ -150,6 +177,12 @@ public class PullBiz implements IPullBiz {
         });
         webDriver.quit();
     }
+
+    @Override
+    public void getCnnTopNews() {
+        webDriver=(WebDriver)beanFactory.getBean("webDriver");
+    }
+
     public List<ElectionNews> getAllElectionNews(){
         String s = template.opsForValue().get(REDISCACHE);
         try {
