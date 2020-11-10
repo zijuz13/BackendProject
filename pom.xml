@@ -14,7 +14,8 @@
         <module>wechat-searchservice</module>
         <module>wechat-video-edit</module>
         <module>wechat-pulldata</module>
-        <module>pulldata-interface</module>
+        <module>wechat-blogwriting</module>
+        <module>blogwriting-interface</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

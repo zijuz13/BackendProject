@@ -8,6 +8,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/blogwriting-interface/pom.xml" />
         <option value="$PROJECT_DIR$/pulldata-interface/pom.xml" />
       </set>
     </option>
