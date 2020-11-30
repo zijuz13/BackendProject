@@ -1,0 +1,5 @@
+server:
+  port: 10022
+spring:
+  application:
+    name: upload-service

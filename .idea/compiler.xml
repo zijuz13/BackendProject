@@ -13,11 +13,12 @@
         <module name="pulldata-service" />
         <module name="itemservice-interface" />
         <module name="wechat-eureka" />
+        <module name="wechat-uploader" />
         <module name="wechat-gateway" />
-        <module name="blog-service" />
+        <module name="wechat-video-edit" />
         <module name="blog-interface" />
         <module name="pulldata-interface" />
-        <module name="wechat-video-edit" />
+        <module name="blog-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -35,6 +36,7 @@
       <module name="wechat-itemservice" target="1.8" />
       <module name="wechat-pulldata" target="1.8" />
       <module name="wechat-searchservice" target="1.8" />
+      <module name="wechat-uploader" target="1.8" />
       <module name="wechat-video-edit" target="1.8" />
       <module name="wechatapp" target="1.8" />
     </bytecodeTargetLevel>
@@ -54,6 +56,7 @@
       <module name="wechat-gateway" options="-parameters" />
       <module name="wechat-pulldata" options="-parameters" />
       <module name="wechat-searchservice" options="-parameters" />
+      <module name="wechat-uploader" options="-parameters" />
       <module name="wechat-video-edit" options="-parameters" />
     </option>
   </component>

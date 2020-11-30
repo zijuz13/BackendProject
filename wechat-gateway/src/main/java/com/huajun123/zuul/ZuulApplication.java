@@ -22,6 +22,7 @@ public class ZuulApplication {
         config.addAllowedOrigin("http://manage.huajun123.com");
         config.addAllowedOrigin("http://www.huajun123.com");
         config.addAllowedOrigin("http://localhost:9001");
+        config.addAllowedOrigin("http://localhost:9530");
         config.setAllowCredentials(true);
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");

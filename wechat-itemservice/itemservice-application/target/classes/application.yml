@@ -1,0 +1,20 @@
+server:
+  port: 10002
+spring:
+  application:
+    name: item-service
+  datasource:
+    username: root
+    password: huajun123
+    url: jdbc:mysql://101.132.194.179:3306/wechat?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+#    prefer-ip-address: true
+#    ip-address: "${HOST}"

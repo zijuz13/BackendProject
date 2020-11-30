@@ -21,10 +21,10 @@ public interface BlogMapper {
          return sqlString;
      }
     }
-    @Insert("insert into blogs(author,content,createtime,title) values(#{author},#{content},#{createtime},#{title})")
+    @Insert("insert into blogs(author,content,displaytime,title,commentstatus,importance,image_uri,summary,status) values(#{author},#{content},#{displaytime},#{title},#{commentstatus},#{importance},#{image_uri},#{summary},#{status})")
     int addBlog(Blog blog);
     @Delete("delete from blogs where id=#{id}")
     int deleteBlog(@Param("id") int id);
-    @Update("update blogs set author=#{author},content=#{content},createtime=#{createtime},title=#{title} where id=#{id}")
+    @Update("update blogs set author=#{author},content=#{content},displaytime=#{displaytime},title=#{title},commentstatus=#{commentstatus},importance=#{importance},image_uri=#{image_uri},summary=#{summary},status=#{status} where id=#{id}")
     int updateBlog(Blog blog);
 }

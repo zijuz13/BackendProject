@@ -16,6 +16,7 @@
         <module>wechat-pulldata</module>
         <module>wechat-blogwriting</module>
         <module>blogwriting-interface</module>
+        <module>wechat-uploader</module>
     </modules>
     <packaging>pom</packaging>
     <parent>
