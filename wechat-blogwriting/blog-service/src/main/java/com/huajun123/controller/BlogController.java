@@ -50,4 +50,10 @@ public class BlogController {
       LOGGER.info("updated Blog id is {}",blog.getId());
       return ResponseEntity.status(HttpStatus.OK).build();
   }
+  //Update Blog status('published','draft')
+  @PutMapping("{id}/{status}")
+    public ResponseEntity<Void> updateStatus(@PathVariable("id")int id,@PathVariable("status")String status){
+      biz.updateStatus(status,id);
+      return ResponseEntity.status(HttpStatus.OK).build();
+  }
 }

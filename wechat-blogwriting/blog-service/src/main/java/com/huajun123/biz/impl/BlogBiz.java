@@ -44,4 +44,9 @@ public class BlogBiz implements IBlogBiz {
     public void updateBlog(Blog blog) {
       mapper.updateBlog(blog);
     }
+
+    @Override
+    public void updateStatus(String status, int id) {
+        mapper.updateStatus(status,id);
+    }
 }

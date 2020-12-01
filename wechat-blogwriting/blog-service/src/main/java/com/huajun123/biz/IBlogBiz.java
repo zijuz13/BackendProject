@@ -11,4 +11,5 @@ public interface IBlogBiz {
     void addBlog(Blog blog);
     void deleteBlog(int id);
     void updateBlog(Blog blog);
+    void updateStatus(String status,int id);
 }

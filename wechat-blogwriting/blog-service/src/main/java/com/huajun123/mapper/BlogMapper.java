@@ -59,4 +59,6 @@ public interface BlogMapper {
     int deleteBlog(@Param("id") int id);
     @Update("update blogs set author=#{author},content=#{content},displaytime=#{displaytime},title=#{title},commentstatus=#{commentstatus},importance=#{importance},image_uri=#{image_uri},summary=#{summary},status=#{status} where id=#{id}")
     int updateBlog(Blog blog);
+    @Update("update blogs set status=#{status} where id=#{id}")
+    int updateStatus(@Param("status")String status,@Param("id")int id);
 }
