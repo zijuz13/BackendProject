@@ -27,6 +27,7 @@ public class BlogBiz implements IBlogBiz {
         Map<String,Object> map=new HashMap<>();
         map.put("items",blogsByCriteria);
         map.put("total",info.getTotal());
+        map.put("totalPages",info.getPages());
         return map;
     }
 
@@ -48,5 +49,10 @@ public class BlogBiz implements IBlogBiz {
     @Override
     public void updateStatus(String status, int id) {
         mapper.updateStatus(status,id);
+    }
+
+    @Override
+    public Blog getBlogById(int id) {
+        return mapper.getBlogById(id);
     }
 }

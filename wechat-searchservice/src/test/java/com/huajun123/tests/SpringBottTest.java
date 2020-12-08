@@ -2,12 +2,14 @@ package com.huajun123.tests;
 
 import com.huajun123.SearchApplication;
 import com.huajun123.biz.ISearchBiz;
-import com.huajun123.domain.Item;
-import com.huajun123.domain.Project;
-import com.huajun123.domain.SearchRequest;
-import com.huajun123.domain.SearchResult;
+import com.huajun123.domain.*;
+import com.huajun123.entity.Blog;
+import com.huajun123.entity.ListQuery;
+import com.huajun123.feignclients.BlogClients;
 import com.huajun123.feignclients.ProjectsClient;
+import com.huajun123.repository.BlogItemRepository;
 import com.huajun123.repository.ItemRepository;
+import com.huajun123.utils.LoadJsonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
@@ -29,6 +32,12 @@ public class SpringBottTest {
     private ElasticsearchTemplate template;
     @Autowired
     private ItemRepository repository;
+    @Autowired
+    private BlogClients blogClients;
+    @Autowired
+    private BlogItemRepository repository1;
+    @Autowired
+    private LoadJsonUtils utils;
     @Test
     public void demo1(){
         SearchRequest request=new SearchRequest();
@@ -44,5 +53,32 @@ public class SpringBottTest {
             return biz.buildItemForSearchFromProject(project);
         }).collect(Collectors.toList());
         repository.saveAll(collect);
+    }
+    @Test
+    public void demo3(){
+        int page=1;
+        int limit=5;
+//        do {
+//            Map<String, Object> blogsByCriteria = blogClients.getBlogsByCriteria(page, limit, "published");
+//            List<BlogItem> items = ((List<Map<String,Object>>) blogsByCriteria.get("items")).stream().map(item -> biz.constructBlogItemFromBlog(item)).collect(Collectors.toList());
+//            items.forEach(System.out::println);
+//            System.out.println(page);
+//            page++;
+//            limit=items.size();
+//        }while(5==limit);
+////        System.out.println(blogsByCriteria);
+        do {
+            Map<String, Object> blogsByCriteria = blogClients.getBlogsByCriteria(page, limit, "published");
+            List<Blog> items = ((List<Map<String, Object>>) blogsByCriteria.get("items")).stream().map(item -> this.utils.loadJsonToBlog(item)).collect(Collectors.toList());
+            List<BlogItem> collect = items.stream().map(item -> biz.constructBlogItemFromBlog(item)).collect(Collectors.toList());
+            collect.forEach(System.out::println);
+            limit= items.size();
+            page++;
+        }while(5==limit);
+    }
+    @Test
+    public void demo33() {
+        template.createIndex(BlogItem.class);
+        template.putMapping(BlogItem.class);
     }
 }

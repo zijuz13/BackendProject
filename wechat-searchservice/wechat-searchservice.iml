@@ -208,5 +208,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.11.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.xmlunit:xmlunit-core:2.5.1" level="project" />
     <orderEntry type="module" module-name="itemservice-interface" />
+    <orderEntry type="module" module-name="blog-interface" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
   </component>
 </module>

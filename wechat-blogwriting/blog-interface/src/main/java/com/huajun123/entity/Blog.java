@@ -21,4 +21,6 @@ public class Blog {
     private String displaytime; //
     private Boolean commentstatus;
     private int importance;
+    private int type;
+    private String category;
 }

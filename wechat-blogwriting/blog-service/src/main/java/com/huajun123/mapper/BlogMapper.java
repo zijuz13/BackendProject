@@ -22,6 +22,9 @@ public interface BlogMapper {
           if(!StringUtils.isNullOrEmpty(blog.getTitle())){
               sqlString+="and title like concat('%',#{title},'%') ";
           }
+          if(!StringUtils.isNullOrEmpty(blog.getStatus())){
+              sqlString+="and status='published' ";
+          }
           if(Optional.ofNullable(blog.getImportance()).isPresent()&&blog.getImportance()!=0){
               sqlString+="and importance=#{importance} ";
           }
@@ -52,13 +55,15 @@ public interface BlogMapper {
          return sqlString;
      }
     }
-    @Insert("insert into blogs(author,content,displaytime,title,commentstatus,importance,image_uri,summary,status) values(#{author},#{content},#{displaytime},#{title},#{commentstatus},#{importance},#{image_uri},#{summary},#{status})")
+    @Insert("insert into blogs(author,content,displaytime,title,commentstatus,importance,image_uri,summary,status,type,category) values(#{author},#{content},#{displaytime},#{title},#{commentstatus},#{importance},#{image_uri},#{summary},#{status},#{type},#{category})")
     @SelectKey(keyColumn = "id",keyProperty = "id",statement = "select last_insert_id()",resultType = int.class, before = false)
     int addBlog(Blog blog);
     @Delete("delete from blogs where id=#{id}")
     int deleteBlog(@Param("id") int id);
-    @Update("update blogs set author=#{author},content=#{content},displaytime=#{displaytime},title=#{title},commentstatus=#{commentstatus},importance=#{importance},image_uri=#{image_uri},summary=#{summary},status=#{status} where id=#{id}")
+    @Update("update blogs set author=#{author},content=#{content},displaytime=#{displaytime},title=#{title},commentstatus=#{commentstatus},importance=#{importance},image_uri=#{image_uri},summary=#{summary},status=#{status},category=#{category} where id=#{id}")
     int updateBlog(Blog blog);
     @Update("update blogs set status=#{status} where id=#{id}")
     int updateStatus(@Param("status")String status,@Param("id")int id);
+    @Select("select * from blogs where id=#{id}")
+    Blog getBlogById(@Param("id")int id);
 }

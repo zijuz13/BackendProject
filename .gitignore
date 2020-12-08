@@ -1,0 +1,8 @@
+/wechat-searchservice/src/main/resources/
+/wechat-pulldata/pulldata-service/src/main/resources/
+/wechat-itemservice/itemservice-application/src/main/resources/
+/wechat-gateway/src/main/resources/
+/wechat-eureka/src/main/resources/
+/wechat-blogwriting/blog-service/src/main/resources/
+/wechat-uploader/src/main/resources/
+/wechat-video-edit/src/main/resources/

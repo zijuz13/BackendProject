@@ -12,4 +12,5 @@ public class ListQuery extends Blog {
     private int page;
     private String sort;
     private String time;
+    private String status;
 }

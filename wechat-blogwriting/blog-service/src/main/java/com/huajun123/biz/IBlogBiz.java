@@ -12,4 +12,5 @@ public interface IBlogBiz {
     void deleteBlog(int id);
     void updateBlog(Blog blog);
     void updateStatus(String status,int id);
+    Blog getBlogById(int id);
 }

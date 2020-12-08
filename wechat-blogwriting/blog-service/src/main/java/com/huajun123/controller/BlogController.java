@@ -4,6 +4,7 @@ import com.huajun123.biz.IBlogBiz;
 import com.huajun123.entity.Blog;
 import com.huajun123.entity.ListQuery;
 import com.huajun123.utils.LoadJsonUtils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,10 @@ public class BlogController {
     public ResponseEntity<Void> updateStatus(@PathVariable("id")int id,@PathVariable("status")String status){
       biz.updateStatus(status,id);
       return ResponseEntity.status(HttpStatus.OK).build();
+  }
+  @GetMapping("{id}")
+    public ResponseEntity<Blog> getBlogById(@PathVariable("id")int id){
+      Blog blogById = biz.getBlogById(id);
+      return ResponseEntity.status(HttpStatus.OK).body(blogById);
   }
 }
