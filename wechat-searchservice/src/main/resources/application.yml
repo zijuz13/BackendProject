@@ -9,6 +9,14 @@ spring:
       cluster-nodes: 123.56.134.245:9300
   jackson:
     default-property-inclusion: non_null
+  rabbitmq:
+    host: 123.56.134.245
+    username: hujkc123
+    password: huajun123
+    virtual-host: /huajun
+#    template:
+#      exchange: huajun.elasticsearch.exchanger
+#    publisher-confirms: true
 eureka:
   client:
     service-url:

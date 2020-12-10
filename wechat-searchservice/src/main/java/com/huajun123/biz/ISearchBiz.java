@@ -7,4 +7,5 @@ public interface ISearchBiz {
   Item buildItemForSearchFromProject(Project project);
   SearchResult searchResultsForWechat(SearchRequest request);
   BlogItem constructBlogItemFromBlog(Blog blog);
+  BlogResults searchBlogs(BlogQuery query);
 }

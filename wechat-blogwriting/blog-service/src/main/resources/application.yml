@@ -10,6 +10,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     host: 127.0.0.1
+  rabbitmq:
+    host: 123.56.134.245
+    username: hujkc123
+    password: huajun123
+    virtual-host: /huajun
+    template:
+      exchange: es.blog.exchange
+    publisher-confirms: true
 eureka:
   client:
     service-url:

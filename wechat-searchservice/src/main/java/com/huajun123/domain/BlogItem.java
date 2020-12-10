@@ -1,5 +1,6 @@
 package com.huajun123.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,13 +23,13 @@ public class BlogItem {
     @Field(type= FieldType.Keyword,index = false)
     private String author;
     @Field(type=FieldType.Keyword,index=false)
-    private String summary;
+    private String content_short;
     @Field(type=FieldType.Keyword,index = false)
     private String image_uri;
     @Field(type=FieldType.Text,index = false)
     private String title;
     @Field(type=FieldType.Keyword,index = false)
-    private String displaytime;
+    private String display_time;
     private Boolean commentstatus;
     private Map<String,Object> specs;
 }

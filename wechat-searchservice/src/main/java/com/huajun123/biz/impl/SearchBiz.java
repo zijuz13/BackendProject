@@ -5,20 +5,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huajun123.biz.ISearchBiz;
 import com.huajun123.domain.*;
 import com.huajun123.entity.Blog;
+import com.huajun123.repository.BlogItemRepository;
 import com.huajun123.repository.ItemRepository;
 import jdk.nashorn.internal.runtime.options.Option;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -35,11 +41,14 @@ public class SearchBiz implements ISearchBiz {
     private static final String FRONTEND="frontendgroup";
     private static final String FRAMEWORK="frameworkgroup";
     private static final String PERSISTENCY="persistencygroup";
+    private static final String CATEGORYGROUP="categorygroup";
     @Autowired
     private ObjectMapper mapper;
     private static final Logger LOGGER= LoggerFactory.getLogger(SearchBiz.class);
     @Autowired
     private ItemRepository repository;
+    @Autowired
+    private BlogItemRepository blogItemRepository;
     @Override
     public Item buildItemForSearchFromProject(Project project) {
         Item item=new Item();
@@ -84,14 +93,14 @@ public class SearchBiz implements ISearchBiz {
             return null;
         }
         //users can query blog's title, content_short, summary information
-        String all=blog.getAuthor()+blog.getSummary()+blog.getTitle();
+        String all=blog.getAuthor()+" "+blog.getSummary()+" "+blog.getTitle();
         BlogItem blogItem=new BlogItem();
         blogItem.setAuthor(blog.getAuthor());
         blogItem.setCommentstatus(blog.getCommentstatus());
-        blogItem.setDisplaytime(blog.getDisplaytime());
+        blogItem.setDisplay_time(blog.getDisplaytime());
         blogItem.setId(Long.parseLong(blog.getId()+""));
         blogItem.setImage_uri(blog.getImage_uri());
-        blogItem.setSummary(blog.getSummary());
+        blogItem.setContent_short(blog.getSummary());
         blogItem.setTitle(blog.getTitle());
         blogItem.setAll(all);
         Map<String,Object> map=new HashMap<>();
@@ -100,6 +109,49 @@ public class SearchBiz implements ISearchBiz {
         return blogItem;
     }
 
+    @Override
+    public BlogResults searchBlogs(BlogQuery query) {
+        NativeSearchQueryBuilder builder=new NativeSearchQueryBuilder();
+//        builder.withSourceFilter(new FetchSourceFilter(new String[]{""},new String[]{"all","specs"}));
+        //ADD search query to form a bool query json string
+        builder.withQuery(this.constructBlogBoolQuerybuilder(QueryBuilders.boolQuery(),query));
+        builder.withSort(SortBuilders.fieldSort("id").order(SortOrder.ASC));
+        this.addAggregationCategoryIntoResults(builder);
+        builder.withPageable(PageRequest.of(query.getPage()-1,query.getLimit()));
+        Page<BlogItem> search = blogItemRepository.search(builder.build());
+        //将聚合结果封装进入结果包装实体
+        return this.encapsulateSearchResultsWithAggregation(((AggregatedPage<BlogItem>)search).getAggregation(CATEGORYGROUP),new BlogResults(search.getContent(),Integer.parseInt(search.getTotalElements()+""),search.getTotalPages()));
+    }
+    private BoolQueryBuilder constructBlogBoolQuerybuilder(BoolQueryBuilder builder,BlogQuery query){
+        if(org.apache.commons.lang.StringUtils.isEmpty(query.getName()))
+            builder.must(QueryBuilders.matchAllQuery());
+        else
+        builder.must(QueryBuilders.matchQuery("all",query.getName()));
+        if(Optional.ofNullable(query.getFilter()).isPresent()){
+            Map<String,String> map=query.getFilter();
+            if(Optional.ofNullable(map.get("category")).isPresent()){
+                String category = map.get("category");
+                builder.filter(QueryBuilders.termQuery("specs.category.keyword",category));
+            }
+        }
+        return builder;
+    }
+    private BlogResults encapsulateSearchResultsWithAggregation(Aggregation aggregation,BlogResults results){
+        if(aggregation instanceof StringTerms){
+            Map<String,Object> map=new HashMap<>();
+            List<StringTerms.Bucket> buckets = ((StringTerms) aggregation).getBuckets();
+            buckets.forEach(bucket -> {
+                map.put(bucket.getKeyAsString(),bucket.getKeyAsNumber());
+            });
+            results.setAggs(map);
+        }else{
+            LOGGER.warn("aggregation is not StringTerms instance");
+        }
+        return results;
+    }
+    private void addAggregationCategoryIntoResults(NativeSearchQueryBuilder builder){
+        builder.addAggregation(AggregationBuilders.terms(CATEGORYGROUP).field("specs.category.keyword"));
+    }
     private BoolQueryBuilder getBoolQueryBuilder(SearchRequest request){
         BoolQueryBuilder builder= QueryBuilders.boolQuery();
         if(null!=request) {
