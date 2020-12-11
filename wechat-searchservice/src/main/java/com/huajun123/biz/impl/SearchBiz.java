@@ -129,9 +129,11 @@ public class SearchBiz implements ISearchBiz {
         builder.must(QueryBuilders.matchQuery("all",query.getName()));
         if(Optional.ofNullable(query.getFilter()).isPresent()){
             Map<String,String> map=query.getFilter();
-            if(Optional.ofNullable(map.get("category")).isPresent()){
-                String category = map.get("category");
-                builder.filter(QueryBuilders.termQuery("specs.category.keyword",category));
+            if(!org.apache.commons.lang.StringUtils.isEmpty(map.get("category"))){
+                String[] category = map.get("category").split(",");
+                for(String c:category){
+                    builder.filter(QueryBuilders.termQuery("specs.category.keyword",c));
+                }
             }
         }
         return builder;
@@ -141,7 +143,7 @@ public class SearchBiz implements ISearchBiz {
             Map<String,Object> map=new HashMap<>();
             List<StringTerms.Bucket> buckets = ((StringTerms) aggregation).getBuckets();
             buckets.forEach(bucket -> {
-                map.put(bucket.getKeyAsString(),bucket.getKeyAsNumber());
+                map.put(bucket.getKeyAsString(),bucket.getDocCount());
             });
             results.setAggs(map);
         }else{
