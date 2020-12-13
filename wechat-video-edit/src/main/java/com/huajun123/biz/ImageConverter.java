@@ -1,5 +1,6 @@
 package com.huajun123.biz;
 
+import org.apache.commons.lang.StringUtils;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
@@ -40,11 +41,17 @@ public class ImageConverter {
         String fileName=videoPath.substring(0,videoPath.lastIndexOf("."))+ ".jpg";
         String newFileName=fileName.substring(fileName.lastIndexOf("/")+1);
         System.out.println(fileName);
-        File file1=new File("/huanghan");
+        String profile = System.getenv("profile");
+        String path="/huanghan";
+        if(StringUtils.isEmpty(profile)){
+            path="/Library/images";
+            LOGGER.info("Application is running on local");
+        }
+        File file1=new File(path);
         if(!file1.exists()){
             file1.mkdirs();
         }
-        File outPut = new File("/huanghan/"+newFileName);
+        File outPut = new File(path+"/"+newFileName);
         try {
             ImageIO.write(FrameToBufferedImage(frame), "jpg", outPut);
         } catch (IOException e) {

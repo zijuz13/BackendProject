@@ -5,7 +5,6 @@ import java.util.Map;
 public class SearchRequest {
   private String name;
   private Map<String,String> filter;
-
     public String getName() {
         return name;
     }

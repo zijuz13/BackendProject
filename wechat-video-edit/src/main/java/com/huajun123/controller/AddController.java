@@ -17,12 +17,7 @@ public class AddController {
     private static final Logger LOGGER= LoggerFactory.getLogger(AddController.class);
     @GetMapping("all")
     public ResponseEntity<Void> transfer(){
-        try{
-            biz.addThumbPictureAddressToDataBase();
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){
-            LOGGER.error("cannot transfer all movies to thumbs cause: {}",e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        LOGGER.info("Deprecated Method is invoked path mapping: /transfer/all");
+     return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

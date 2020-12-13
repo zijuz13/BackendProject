@@ -53,7 +53,7 @@ public class SpringBottTest {
     public void demo2() {
         template.createIndex(Item.class);
         template.putMapping(Item.class);
-        List<Item> collect = client.getProjectsByCriteria(1, null).stream().map(project -> {
+        List<Item> collect = client.getProjectAkk().stream().map(project -> {
             return biz.buildItemForSearchFromProject(project);
         }).collect(Collectors.toList());
         repository.saveAll(collect);

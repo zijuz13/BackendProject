@@ -14,7 +14,6 @@ public class SpringBootTester {
     private IEditBiz biz;
     @Test
     public void demo1(){
-       biz.addThumbPictureAddressToDataBase();
     }
     @Test
     public void demo2(){

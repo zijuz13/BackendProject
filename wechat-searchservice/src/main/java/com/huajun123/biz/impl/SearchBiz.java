@@ -78,9 +78,13 @@ public class SearchBiz implements ISearchBiz {
         BoolQueryBuilder boolQueryBuilder = this.getBoolQueryBuilder(request);
         builder.withQuery(boolQueryBuilder);
         builder.withSourceFilter(new FetchSourceFilter(null,new String[]{"map"}));
+        if(request instanceof BlogQuery){
+            BlogQuery request1 = (BlogQuery) request;
+            builder.withPageable(PageRequest.of(request1.getPage()-1,request1.getLimit()));
+        }
         Page<Item> search = this.repository.search(builder.build());
         Map<String, List<String>> searchAggregation = this.getSearchAggregation(boolQueryBuilder);
-        return new SearchResult(search.getContent(),searchAggregation);
+        return new SearchResult(search.getContent(),searchAggregation,search.getTotalPages(),Integer.parseInt(search.getTotalElements()+""));
     }
 
     @Override

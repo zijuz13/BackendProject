@@ -6,15 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("projects")
 public interface ProjectsApi {
-    @GetMapping("all/{status}")
-    List<Project> getProjectsByCriteria(@PathVariable("status")Integer status, @RequestParam(value="name",required = false)String name);
     @DeleteMapping("{id}")
     void deleteProject(@PathVariable("id")Integer id);
     @PostMapping
     void postProject(Project project);
     @PutMapping
     void updateProject(@RequestBody Project project);
+    @GetMapping("{id}")
+    Project getProjectById(@PathVariable("id")int id);
+    @GetMapping("alls")
+   List<Project> getProjectAkk();
 }

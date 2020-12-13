@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: wechat-zuul
+  profiles:
+    active: ${profile}
 zuul:
   prefix: /api
   routes:
@@ -18,9 +20,6 @@ eureka:
     registry-fetch-interval-seconds: 10
     fetch-registry: true
     register-with-eureka: true
-#  instance:
-#    prefer-ip-address: true
-#    ip-address: "${host}"
 ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000

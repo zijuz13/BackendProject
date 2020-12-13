@@ -1,6 +1,7 @@
 package com.huajun123.controller;
 
 import com.huajun123.biz.ISearchBiz;
+import com.huajun123.domain.BlogQuery;
 import com.huajun123.domain.SearchRequest;
 import com.huajun123.domain.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class SearchController {
     @Autowired
     private ISearchBiz biz;
     @PostMapping("all")
-    public ResponseEntity<SearchResult> searchProjectsForMyWechatApps(@RequestBody SearchRequest request){
+    public ResponseEntity<SearchResult> searchProjectsForMyWechatApps(@RequestBody BlogQuery request){
         System.out.println(request);
         SearchResult searchResult = biz.searchResultsForWechat(request);
         if(Optional.ofNullable(searchResult).isPresent()){

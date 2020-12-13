@@ -135,7 +135,6 @@
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-slf4j:9.7.0" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-hystrix:9.7.0" level="project" />
     <orderEntry type="library" name="Maven: com.netflix.hystrix:hystrix-core:1.5.12" level="project" />
-    <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.9" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-java8:9.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-amqp:2.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.0.11.RELEASE" level="project" />
@@ -214,6 +213,12 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.11.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.xmlunit:xmlunit-core:2.5.1" level="project" />
     <orderEntry type="module" module-name="itemservice-interface" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-actuator:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator-autoconfigure:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator:2.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.micrometer:micrometer-core:1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.latencyutils:LatencyUtils:2.0.3" level="project" />
     <orderEntry type="module" module-name="blog-interface" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
   </component>

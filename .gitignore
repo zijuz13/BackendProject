@@ -6,3 +6,12 @@
 /wechat-blogwriting/blog-service/src/main/resources/
 /wechat-uploader/src/main/resources/
 /wechat-video-edit/src/main/resources/
+/wechat-blogwriting/blog-service/target/
+/wechat-itemservice/itemservice-application/target/
+/wechat-itemservice/itemservice-interface/target/
+/wechat-gateway/target/
+/wechat-eureka/target/
+/wechat-pulldata/pulldata-service/target/
+/wechat-searchservice/target/
+/wechat-uploader/target/
+/wechat-video-edit/target/

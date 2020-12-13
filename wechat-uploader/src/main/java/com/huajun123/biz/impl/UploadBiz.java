@@ -1,10 +1,12 @@
 package com.huajun123.biz.impl;
 
 import com.huajun123.biz.IUploadBiz;
+import com.sun.media.jfxmedia.control.VideoDataBuffer;
 import org.assertj.core.util.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,20 +24,24 @@ public class UploadBiz implements IUploadBiz {
         try {
             String replace = UUID.randomUUID().toString().toUpperCase().replace("_", "");
             String newName = replace + "" + file.getOriginalFilename();
-            BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-            if(Optional.ofNullable(bufferedImage).isPresent()){
+                //Use System.getProperty to infer whether or not the application is running on hosts orther than huajun.link host
                 String storePath="/Library/images";
+                String imagePath=System.getenv("ImagePath");
+                boolean flag=false;
+                if(flag=(!StringUtils.isEmpty(imagePath))){
+                    storePath=imagePath;
+                    LOGGER.info("Running on Linux other than www.huajun.link! The specified Image Path is {}",imagePath);
+                }
                 File file1 = new File(storePath);
-                if(!Optional.ofNullable(file1).isPresent()){
+                if(!file1.exists()){
                     file1.mkdirs();
                 }
                 file.transferTo(new File(storePath+"/"+newName));
                 Map<String,Object> map=new HashMap<>();
-                map.put("files",Maps.newHashMap("file","http://images.huajun.link"+"/"+newName));
+                String record=null;
+                map.put("files",Maps.newHashMap("file",record=((flag?System.getenv("DomainPath"):"http://images.huajun.link")+"/"+newName)));
+                LOGGER.info("image path is {}",record);
                 return map;
-            }else{
-                return Maps.newHashMap("failMessage","The File uploaded is empty, please try another file");
-            }
         }catch (Exception e){
                 LOGGER.error("file uploading failed, because {}",e.getMessage());
         }

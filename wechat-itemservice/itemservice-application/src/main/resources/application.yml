@@ -8,6 +8,14 @@ spring:
     password: huajun123
     url: jdbc:mysql://101.132.194.179:3306/wechat?serverTimezone=UTC&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: 123.56.134.245
+    username: hujkc123
+    password: huajun123
+    virtual-host: /huajun
+    template:
+      exchange: item.create.exchange
+    publisher-confirms: true
 eureka:
   client:
     register-with-eureka: true

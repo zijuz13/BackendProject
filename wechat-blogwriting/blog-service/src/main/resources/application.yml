@@ -18,6 +18,8 @@ spring:
     template:
       exchange: es.blog.exchange
     publisher-confirms: true
+  profiles:
+    active: ${profile}
 eureka:
   client:
     service-url:
