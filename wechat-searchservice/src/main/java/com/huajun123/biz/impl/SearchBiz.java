@@ -42,6 +42,7 @@ public class SearchBiz implements ISearchBiz {
     private static final String FRAMEWORK="frameworkgroup";
     private static final String PERSISTENCY="persistencygroup";
     private static final String CATEGORYGROUP="categorygroup";
+    private static final Map<String,String> translator=new HashMap<>();
     @Autowired
     private ObjectMapper mapper;
     private static final Logger LOGGER= LoggerFactory.getLogger(SearchBiz.class);
@@ -49,6 +50,11 @@ public class SearchBiz implements ISearchBiz {
     private ItemRepository repository;
     @Autowired
     private BlogItemRepository blogItemRepository;
+    {
+        translator.put("前端","frontend");
+        translator.put("框架","framework");
+        translator.put("持久层","persistency");
+    }
     @Override
     public Item buildItemForSearchFromProject(Project project) {
         Item item=new Item();
@@ -166,12 +172,19 @@ public class SearchBiz implements ISearchBiz {
             }else{
                 builder.must(QueryBuilders.matchAllQuery());
             }
-            if(null!=request.getFilter()){
-                Map<String, String> filter = request.getFilter();
-                for(Map.Entry<String,String> map1:filter.entrySet()){
-                    String key = map1.getKey();
-                    String value = map1.getValue();
-                    builder.filter(QueryBuilders.termQuery("map."+key+".keyword",value));
+            if(request instanceof BlogQuery) {
+                BlogQuery request1 = (BlogQuery) request;
+                if (null != request1) {
+                    Map<String, List<String>> map = request1.getMap();
+                    for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                        String key = entry.getKey();
+                        List<String> value = entry.getValue();
+                        if(value.size()>0) {
+                            for (String s : value) {
+                                builder.filter(QueryBuilders.termQuery("map." + translator.get(key) + ".keyword", s));
+                            }
+                        }
+                    }
                 }
             }
         }else{

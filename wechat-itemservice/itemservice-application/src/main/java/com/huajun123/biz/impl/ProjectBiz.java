@@ -55,8 +55,8 @@ public class ProjectBiz implements IProjectsBiz {
 
     @Override
     public void updateProject(Project project) {
-        System.out.println(project);
         mapper.updateProject(project);
+        template.convertAndSend("item.create",project.getId());
     }
 
     @Override

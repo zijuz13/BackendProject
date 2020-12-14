@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = SearchApplication.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = SearchApplication.class)
 public class SpringBottTest {
     @Autowired
     private ISearchBiz biz;
@@ -41,7 +41,6 @@ public class SpringBottTest {
     @Autowired
     private LoadJsonUtils utils;
 
-    @Test
     public void demo1() {
         SearchRequest request = new SearchRequest();
         request.setName("JSP");
@@ -49,17 +48,15 @@ public class SpringBottTest {
         System.out.println(searchResult);
     }
 
-    @Test
     public void demo2() {
-        template.createIndex(Item.class);
-        template.putMapping(Item.class);
-        List<Item> collect = client.getProjectAkk().stream().map(project -> {
-            return biz.buildItemForSearchFromProject(project);
-        }).collect(Collectors.toList());
-        repository.saveAll(collect);
+//        template.createIndex(Item.class);
+//        template.putMapping(Item.class);
+//        List<Item> collect = client.getProjectAkk().stream().map(project -> {
+//            return biz.buildItemForSearchFromProject(project);
+//        }).collect(Collectors.toList());
+//        repository.saveAll(collect);
     }
 
-    @Test
     public void demo3() {
         int page = 1;
         int limit = 5;
@@ -83,19 +80,16 @@ public class SpringBottTest {
         } while (5 == limit);
     }
 
-    @Test
     public void demo33() {
         template.createIndex(BlogItem.class);
         template.putMapping(BlogItem.class);
     }
 
-    @Test
     public void demo34() {
         MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();
         Iterable<BlogItem> search = repository1.search(matchAllQueryBuilder);
         search.forEach(System.out::println);
     }
-    @Test
     public void demo35(){
         template.deleteIndex("web");
     }

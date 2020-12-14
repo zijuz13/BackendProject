@@ -14,9 +14,8 @@ spring:
     username: hujkc123
     password: huajun123
     virtual-host: /huajun
-#    template:
-#      exchange: huajun.elasticsearch.exchanger
-#    publisher-confirms: true
+  profiles:
+    active: ${profile}
 eureka:
   client:
     service-url:
