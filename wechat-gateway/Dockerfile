@@ -7,4 +7,4 @@ WORKDIR $MYPATH
 VOLUME $MYPATH
 COPY ./target/wechat-gateway-1.0-SNAPSHOT.jar $MYPATH
 EXPOSE 10010
-CMD ["java","-jar","./wechat-gateway-1.0-SNAPSHOT.jar"]
+CMD ["java","-Xms256m","-Xmx256m","-jar","./wechat-gateway-1.0-SNAPSHOT.jar"]

@@ -21,7 +21,7 @@ public class UploadServiceApplication {
         CorsConfiguration config=new CorsConfiguration();
         config.addAllowedOrigin("http://manage.huajun123.com");
         config.addAllowedOrigin("http://www.huajun123.com");
-        config.addAllowedOrigin("https://www.huajun.link");
+        config.addAllowedOrigin("http://www.huajun.link");
         config.addAllowedOrigin("http://manage.huajun.link");
         config.addAllowedOrigin("http://localhost:9001");
         config.addAllowedOrigin("http://localhost:9529");

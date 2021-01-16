@@ -1,7 +1,5 @@
 package com.huajun123.clients;
 
-import com.huajun123.entity.Blog;
-import com.huajun123.entity.ListQuery;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

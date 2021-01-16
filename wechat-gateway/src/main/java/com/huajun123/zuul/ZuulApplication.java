@@ -1,7 +1,5 @@
 package com.huajun123.zuul;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,16 +13,14 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 @EnableZuulProxy
 public class ZuulApplication {
-    private static final Logger LOGGER= LoggerFactory.getLogger(ZuulApplication.class);
     public static void main(String[] args) {
-        LOGGER.info(System.getProperty("profile"));
-        LOGGER.info(System.getProperty("eureka.client.service-url.defaultZone"));
         SpringApplication.run(ZuulApplication.class);
     }
     @Bean
     public CorsFilter corsFilter(){
         CorsConfiguration config=new CorsConfiguration();
         config.addAllowedOrigin("https://www.huajun.link");
+        config.addAllowedOrigin("http://www.huajun.link");
         config.addAllowedOrigin("http://manage.huajun.link");
         config.addAllowedOrigin("http://manage.huajun123.com");
         config.addAllowedOrigin("http://www.huajun123.com");

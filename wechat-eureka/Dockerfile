@@ -1,6 +1,7 @@
 FROM java:8
 RUN mkdir -pv /home/hujkc123/
 ENV MYPATH /home/hujkc123
+ENV profile prod
 WORKDIR $MYPATH
 COPY ./target/wechat-eureka-1.0-SNAPSHOT.jar $MYPATH
 EXPOSE 10086

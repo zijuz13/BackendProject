@@ -15,9 +15,6 @@ zuul:
     blog-service: /blog/**
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:10086/eureka
-    registry-fetch-interval-seconds: 10
     fetch-registry: true
     register-with-eureka: true
 ribbon:
