@@ -18,6 +18,9 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 //Use RabbitMQ as a messaging queue to realize the data synchronization between RABBITMQ and MySQL
 @Component
 public class Listeners {
@@ -50,23 +53,19 @@ public class Listeners {
         repository.deleteById(Long.parseLong(id+""));
     }
     @RabbitListener(bindings = @QueueBinding(value=@Queue(value="search.project.queue",durable = "true"),exchange = @Exchange(
-            value="item.create.exchange",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),key={"item.create"}
+            value="item.create.exchange",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),key={"item.create.then"}
     ))
     public void listenCreate1(int id){
-        //Sleep to wait for imageUrl finishing
-        try {
-            Thread.sleep(10000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Project projectById = projectsClient.getProjectById(id);
-        Item item = biz.buildItemForSearchFromProject(projectById);
-        repository1.save(item);
+            Project projectById = projectsClient.getProjectById(id);
+            Item item = biz.buildItemForSearchFromProject(projectById);
+            System.out.println(item);
+            repository1.save(item);
     }
-    @RabbitListener(bindings = @QueueBinding(value=@Queue(value="search.project.queue1",durable = "true"),exchange = @Exchange(
-            value="item.delete.exchange",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),key={"item.delete"}
+    @RabbitListener(bindings = @QueueBinding(value=@Queue(value="search.delete.queue",durable = "true"),exchange = @Exchange(
+            value="item.create.exchange",ignoreDeclarationExceptions = "true",type = ExchangeTypes.TOPIC),key={"delete.es"}
     ))
     public void delete1(int id){
+        LOGGER.info("received:{}",id);
         repository1.deleteById(Long.parseLong(id+""));
     }
 }

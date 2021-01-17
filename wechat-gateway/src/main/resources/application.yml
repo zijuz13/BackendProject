@@ -5,6 +5,11 @@ spring:
     name: wechat-zuul
   profiles:
     active: ${profile}
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      enabled: true
 zuul:
   prefix: /api
   routes:

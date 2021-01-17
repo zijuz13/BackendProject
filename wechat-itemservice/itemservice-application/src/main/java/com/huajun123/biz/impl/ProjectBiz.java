@@ -50,9 +50,8 @@ public class ProjectBiz implements IProjectsBiz {
     @Override
     public void deleteProject(Integer id) {
    mapper.deleteProject(id);
-   template.convertAndSend("item.delete.exchange","item.delete",id);
+   template.convertAndSend("delete.es",id);
     }
-
     @Override
     public void updateProject(Project project) {
         mapper.updateProject(project);

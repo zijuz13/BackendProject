@@ -10,6 +10,7 @@
       <set>
         <option value="$PROJECT_DIR$/blogwriting-interface/pom.xml" />
         <option value="$PROJECT_DIR$/pulldata-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/wechat-complex/pom.xml" />
       </set>
     </option>
   </component>

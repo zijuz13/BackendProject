@@ -2,14 +2,8 @@ server:
   port: 10034
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:10086/eureka
-    registry-fetch-interval-seconds: 10
     fetch-registry: true
     register-with-eureka: true
-  instance:
-    lease-expiration-duration-in-seconds: 10
-    lease-renewal-interval-in-seconds: 5
 feign:
   client:
     config:
@@ -19,6 +13,11 @@ feign:
 spring:
   application:
     name: edit-service
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      enabled: true
   profiles:
     active: ${profile}
   rabbitmq:
@@ -26,3 +25,6 @@ spring:
     username: hujkc123
     password: huajun123
     virtual-host: /huajun
+    template:
+      exchange: item.create.exchange
+    publisher-confirms: true

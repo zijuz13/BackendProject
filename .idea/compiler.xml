@@ -6,19 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wechat-searchservice" />
-        <module name="pulldata-interface1" />
-        <module name="itemservice-application" />
+        <module name="blog-interface" />
+        <module name="blog-service" />
         <module name="blogwriting-interface" />
         <module name="pulldata-service" />
-        <module name="itemservice-interface" />
-        <module name="wechat-eureka" />
-        <module name="wechat-uploader" />
-        <module name="wechat-gateway" />
+        <module name="wechat-complex" />
         <module name="wechat-video-edit" />
-        <module name="blog-interface" />
+        <module name="wechat-gateway" />
+        <module name="wechat-searchservice" />
+        <module name="wechat-eureka" />
+        <module name="itemservice-interface" />
         <module name="pulldata-interface" />
-        <module name="blog-service" />
+        <module name="pulldata-interface1" />
+        <module name="itemservice-application" />
+        <module name="wechat-uploader" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -31,6 +32,7 @@
       <module name="pulldata-interface1" target="1.8" />
       <module name="pulldata-service" target="1.8" />
       <module name="wechat-blogwriting" target="1.8" />
+      <module name="wechat-complex" target="1.8" />
       <module name="wechat-eureka" target="1.8" />
       <module name="wechat-gateway" target="1.8" />
       <module name="wechat-itemservice" target="1.8" />
@@ -52,6 +54,7 @@
       <module name="pulldata-interface1" options="-parameters" />
       <module name="pulldata-service" options="-parameters" />
       <module name="wechat-blogwriting" options="-parameters" />
+      <module name="wechat-complex" options="-parameters" />
       <module name="wechat-eureka" options="-parameters" />
       <module name="wechat-gateway" options="-parameters" />
       <module name="wechat-pulldata" options="-parameters" />

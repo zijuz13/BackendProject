@@ -1,5 +1,6 @@
 package com.huajun123.biz;
 
+import com.huajun123.config.ImageConfigurations;
 import org.apache.commons.lang.StringUtils;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
@@ -7,17 +8,23 @@ import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
+import javax.xml.ws.soap.Addressing;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
 @Component
+@EnableConfigurationProperties(ImageConfigurations.class)
 public class ImageConverter {
     private static final Logger LOGGER= LoggerFactory.getLogger(ImageConverter.class);
+    @Autowired
+    private ImageConfigurations configurations;
     public String convert(String videoPath){
         Frame frame = null;
         //构造器支持InputStream，可以直接传MultipartFile.getInputStream()
@@ -40,13 +47,7 @@ public class ImageConverter {
         }
         String fileName=videoPath.substring(0,videoPath.lastIndexOf("."))+ ".jpg";
         String newFileName=fileName.substring(fileName.lastIndexOf("/")+1);
-        System.out.println(fileName);
-        String profile = System.getenv("profile");
-        String path="/huanghan";
-        if(StringUtils.isEmpty(profile)){
-            path="/Library/images";
-            LOGGER.info("Application is running on local");
-        }
+        String path=configurations.getDockerPath();
         File file1=new File(path);
         if(!file1.exists()){
             file1.mkdirs();

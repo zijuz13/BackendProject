@@ -13,6 +13,11 @@ feign:
 spring:
   application:
     name: edit-service
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+      enabled: true
   profiles:
     active: ${profile}
   rabbitmq:
@@ -20,3 +25,6 @@ spring:
     username: hujkc123
     password: huajun123
     virtual-host: /huajun
+    template:
+      exchange: item.create.exchange
+    publisher-confirms: true
